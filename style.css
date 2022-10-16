@@ -1,0 +1,63 @@
+
+.container {
+    box-sizing: content-box;
+    border: solid;
+    padding: 20px;
+    background-color: #59CE8F;
+    width: 450px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-block {
+    flex: 1;
+}
+/*Screen*/
+#screen-container {
+    background-color: #E8F9FD;
+    border: solid;
+    box-sizing: content-box;
+}
+
+#total-screen {
+    height: 40%;
+    font-size: 20px;
+}
+
+#input-screen {
+    height: 60%;
+    font-size: 40px;
+}
+
+/*option buttons*/
+#options-container {
+    display: flex;
+    gap: 15px;
+}
+
+.option-button {
+    flex: 1;
+    background-color: #E8F9FD;
+    border: solid;
+    margin-top: 20px;
+}
+
+/*number buttons*/
+#number-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.number-button,
+.operator-button {
+    flex: 1;
+    background-color: #E8F9FD;
+    border: solid;
+    margin: 10px;
+}
+
+.number-row {
+    display: flex;
+    flex: 1;
+}
