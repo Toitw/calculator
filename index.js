@@ -50,38 +50,49 @@ totalScreen.textContent = "";
 //and store y
 let operation = false;
 
+//Function to get the result
+function getResult () {
+    y = parseInt(inputScreen.textContent);
+    total = operate(x, operator, y);
+    inputScreen.textContent = total;
+    totalScreen.textContent = total;
+    x = total;
+    operation = false;
+    operator = "";
+}
+
 //Operations on numbers. When operation = false, keep adding numbers
 //on display. Once operation = true, screen back to 0 to start
 //adding numbers from the beginning
 numberButton.forEach((button) => {
 button.addEventListener("click", () => {
-    if(operation === false) {
         inputScreen.textContent += button.textContent;
-    } else {
-        inputScreen.textContent = "";
-        inputScreen.textContent += button.textContent;
-    }
     });
 });
 
 const operatorButton = document.querySelectorAll(".operator-button");
 operatorButton.forEach((button) => {
 button.addEventListener("click", () => {
-    operator = button.id;
-    x = parseInt(inputScreen.textContent);
-    totalScreen.textContent = inputScreen.textContent + button.textContent;
-    operation = true;
+    if(operator === "") {
+        operator = button.id;
+        x = parseInt(inputScreen.textContent);
+        totalScreen.textContent = inputScreen.textContent + button.textContent;
+        inputScreen.textContent = "";
+        operation = true;
+    } else {
+        y = parseInt(inputScreen.textContent);
+        total = operate(x, operator, y);
+        operator = button.id;
+        inputScreen.textContent = total;
+        totalScreen.textContent = inputScreen.textContent + button.textContent;
+        x = total;
+        inputScreen.textContent = "";
+    }
 });
 });
 
 const equalButton = document.querySelector("#equal");
-equalButton.addEventListener("click", () => {
-    y = parseInt(inputScreen.textContent);
-    total = operate(x, operator, y);
-    inputScreen.textContent = total;
-    totalScreen.textContent = total;
-    operation = false;
-});
+equalButton.addEventListener("click", getResult);
 
 const clearButton = document.querySelector("#clear-button");
 clearButton.addEventListener("click", () => {
@@ -89,5 +100,7 @@ clearButton.addEventListener("click", () => {
     y = 0;
     total = 0;
     operator = "";
+    totalScreen.textContent = "";
+    inputScreen.textContent = "";
 });
 
