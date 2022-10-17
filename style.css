@@ -50,7 +50,8 @@
 }
 
 .number-button,
-.operator-button {
+.operator-button,
+.equal-button {
     flex: 1;
     background-color: #E8F9FD;
     border: solid;
