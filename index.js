@@ -50,49 +50,75 @@ totalScreen.textContent = "";
 //and store y
 let operation = false;
 
+//Switch variable so the calculator knows if we already pressed decimal
+//just before
+let decimal = false;
+
 //Function to get the result
 function getResult () {
-    y = parseInt(inputScreen.textContent);
+    y = parseFloat(inputScreen.textContent);
     total = operate(x, operator, y);
-    inputScreen.textContent = total;
-    totalScreen.textContent = total;
+    inputScreen.textContent = Math.round(total*100)/100;
+    totalScreen.textContent = Math.round(total*100)/100;
     x = total;
-    operation = false;
     operator = "";
+    operation = true;
+    decimal = false;
 }
 
 //Operations on numbers. When operation = false, keep adding numbers
 //on display. Once operation = true, screen back to 0 to start
 //adding numbers from the beginning
 numberButton.forEach((button) => {
-button.addEventListener("click", () => {
-        inputScreen.textContent += button.textContent;
+    if(operation === true) {
+        button.addEventListener("click", () => {
+            inputScreen.textContent = button.textContent;
+        });
+    } else {
+        button.addEventListener("click", () => {
+            inputScreen.textContent += button.textContent;
     });
-});
+}});
 
 const operatorButton = document.querySelectorAll(".operator-button");
 operatorButton.forEach((button) => {
 button.addEventListener("click", () => {
     if(operator === "") {
         operator = button.id;
-        x = parseInt(inputScreen.textContent);
+        x = parseFloat(inputScreen.textContent);
         totalScreen.textContent = inputScreen.textContent + button.textContent;
         inputScreen.textContent = "";
-        operation = true;
+        decimal = false;
     } else {
-        y = parseInt(inputScreen.textContent);
+        y = parseFloat(inputScreen.textContent);
         total = operate(x, operator, y);
         operator = button.id;
-        inputScreen.textContent = total;
+        inputScreen.textContent = Math.round(total*100)/100;
         totalScreen.textContent = inputScreen.textContent + button.textContent;
         x = total;
         inputScreen.textContent = "";
+        decimal = false;
     }
 });
 });
 
 const equalButton = document.querySelector("#equal");
 equalButton.addEventListener("click", getResult);
+
+const deleteButton = document.querySelector("#delete-button");
+deleteButton.addEventListener("click", () => {
+    inputScreen.textContent = inputScreen.textContent.slice(0, -1);
+});
+
+const decimalButton = document.querySelector("#decimal");
+decimalButton.addEventListener("click", (button) => {
+    if(decimal === false) {
+        inputScreen.textContent += ".";
+        decimal = true;
+    } else {
+        return;
+    }
+});
 
 const clearButton = document.querySelector("#clear-button");
 clearButton.addEventListener("click", () => {
@@ -102,5 +128,6 @@ clearButton.addEventListener("click", () => {
     operator = "";
     totalScreen.textContent = "";
     inputScreen.textContent = "";
+    operation = false;
 });
 
