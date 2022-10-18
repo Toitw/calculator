@@ -55,6 +55,8 @@ let operation = false;
 let decimal = false;
 
 //Function to get the result, with math.round to control decimals
+//reset the operator, the operation and decimal, and if it was 
+//pressed just before, return so it does nothing.
 function getResult () {
     if(operation === false) {
         y = parseFloat(inputScreen.textContent);
@@ -74,17 +76,15 @@ function getResult () {
 //on display. Once operation = true, screen back to 0 to start
 //adding numbers from the beginning
 numberButton.forEach((button) => {
-    if(operation == true) {
-        clear;
-        button.addEventListener("click", () => {
+    button.addEventListener("click", () => {
+        if(operation === true) {
+            clear();
             inputScreen.textContent = button.textContent;
-        });
-    } else {
-        button.addEventListener("click", () => {
+        } else {
             inputScreen.textContent += button.textContent;
+        }
     });
-    operation = false;
-}});
+});
 
 const operatorButton = document.querySelectorAll(".operator-button");
 operatorButton.forEach((button) => {
