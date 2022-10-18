@@ -1,13 +1,26 @@
 
+* {
+    font-family: 'Roboto', sans-serif;
+    border-radius: 8px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .container {
     box-sizing: content-box;
     border: solid;
     padding: 20px;
     background-color: #59CE8F;
-    width: 450px;
+    width: 350px;
     height: 500px;
     display: flex;
     flex-direction: column;
+    margin-top: 110px;
 }
 
 .container-block {
@@ -23,24 +36,38 @@
 #total-screen {
     height: 40%;
     font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 12px;
 }
 
 #input-screen {
     height: 60%;
     font-size: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 12px;
 }
 
 /*option buttons*/
 #options-container {
     display: flex;
     gap: 15px;
+    height: 100px;
 }
 
 .option-button {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #E8F9FD;
     border: solid;
     margin-top: 20px;
+    height: 70px;
+    font-size: 24px;
 }
 
 /*number buttons*/
@@ -56,10 +83,27 @@
     flex: 1;
     background-color: #E8F9FD;
     border: solid;
-    margin: 10px;
+    margin: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 40px;
 }
 
 .number-row {
     display: flex;
     flex: 1;
+}
+
+#clear-button {
+    background-color: #FF1E00;
+    color: white;
+    border-color: black;
+}
+
+#delete-button {
+    background-color: black;
+    color: white;
+    border-color: black;
 }
