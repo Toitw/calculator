@@ -54,6 +54,9 @@ let operation = false;
 //just before
 let decimal = false;
 
+//Switch variable to stop adding numbers
+let topDigits = false;
+
 //Function to get the result, with math.round to control decimals
 //reset the operator, the operation and decimal, and if it was 
 //pressed just before, return so it does nothing.
@@ -74,12 +77,14 @@ function getResult () {
 
 //Operations on numbers. When operation = false, keep adding numbers
 //on display. Once operation = true, screen back to 0 to start
-//adding numbers from the beginning
+//adding numbers from the beginning. Max 13 digits
 numberButton.forEach((button) => {
     button.addEventListener("click", () => {
         if(operation === true) {
             clear();
             inputScreen.textContent = button.textContent;
+        } else if(inputScreen.textContent.length === 13) {
+            alert("You reach the maximum number of digits. Pretty sure you don't have all that money",)
         } else {
             inputScreen.textContent += button.textContent;
         }
