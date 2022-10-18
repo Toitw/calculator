@@ -54,23 +54,28 @@ let operation = false;
 //just before
 let decimal = false;
 
-//Function to get the result
+//Function to get the result, with math.round to control decimals
 function getResult () {
-    y = parseFloat(inputScreen.textContent);
-    total = operate(x, operator, y);
-    inputScreen.textContent = Math.round(total*100)/100;
-    totalScreen.textContent = Math.round(total*100)/100;
-    x = total;
-    operator = "";
-    operation = true;
-    decimal = false;
+    if(operation === false) {
+        y = parseFloat(inputScreen.textContent);
+        total = operate(x, operator, y);
+        inputScreen.textContent = Math.round(total*100)/100;
+        totalScreen.textContent = Math.round(total*100)/100;
+        x = total;
+        operator = "";
+        operation = true;
+        decimal = false;
+    } else {
+        return;
+    }
 }
 
 //Operations on numbers. When operation = false, keep adding numbers
 //on display. Once operation = true, screen back to 0 to start
 //adding numbers from the beginning
 numberButton.forEach((button) => {
-    if(operation === true) {
+    if(operation == true) {
+        clear;
         button.addEventListener("click", () => {
             inputScreen.textContent = button.textContent;
         });
@@ -78,6 +83,7 @@ numberButton.forEach((button) => {
         button.addEventListener("click", () => {
             inputScreen.textContent += button.textContent;
     });
+    operation = false;
 }});
 
 const operatorButton = document.querySelectorAll(".operator-button");
@@ -89,6 +95,7 @@ button.addEventListener("click", () => {
         totalScreen.textContent = inputScreen.textContent + button.textContent;
         inputScreen.textContent = "";
         decimal = false;
+        operation = false;
     } else {
         y = parseFloat(inputScreen.textContent);
         total = operate(x, operator, y);
@@ -98,6 +105,7 @@ button.addEventListener("click", () => {
         x = total;
         inputScreen.textContent = "";
         decimal = false;
+        operation = false;
     }
 });
 });
@@ -120,8 +128,8 @@ decimalButton.addEventListener("click", (button) => {
     }
 });
 
-const clearButton = document.querySelector("#clear-button");
-clearButton.addEventListener("click", () => {
+//Clear function
+function clear () {
     x = 0;
     y = 0;
     total = 0;
@@ -129,5 +137,8 @@ clearButton.addEventListener("click", () => {
     totalScreen.textContent = "";
     inputScreen.textContent = "";
     operation = false;
-});
+}
+
+const clearButton = document.querySelector("#clear-button");
+clearButton.addEventListener("click", clear);
 
